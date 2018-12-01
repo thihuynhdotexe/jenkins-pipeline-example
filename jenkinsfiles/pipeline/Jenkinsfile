@@ -1,6 +1,6 @@
 node{
 
-  git branch: "test", url: "https://github.com/robsonbittencourt/jenkins-pipeline-example" 
+  git branch: "tes", url: "file:///var/jenkins_home/git" 
 
   stage ('Build HML image') {
     sh "docker tag localhost:5000/robsonbittencourt/jenkins-pipeline-example:dsv localhost:5000/robsonbittencourt/jenkins-pipeline-example:hml"

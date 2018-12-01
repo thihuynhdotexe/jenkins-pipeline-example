@@ -31,7 +31,7 @@ services:
       - /var/jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
       - ~/.m2:/root/.m2
-      - v ~/dev/jenkins-pipeline-example:/var/jenkins_home/git:ro 
+      - ~/dev/jenkins-pipeline-example:/var/jenkins_home/git:ro 
     ports:
       - 8080:8080
       - 50000:50000
