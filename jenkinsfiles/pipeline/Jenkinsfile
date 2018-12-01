@@ -16,7 +16,6 @@ node{
     sh(script:"docker stop app-hml", returnStatus:true)
     sh(script:"docker rm -f app-hml", returnStatus:true)
     
-    sh "docker pull robsonbittencourt/jenkins-pipeline-example:hml"
     sh "docker run -d --name=app-hml -p 8085:8085 robsonbittencourt/jenkins-pipeline-example:hml"
     sh "sleep 30"   
   }
@@ -41,7 +40,6 @@ node{
     sh(script:"docker stop app-prd", returnStatus:true)
     sh(script:"docker rm -f app-prd", returnStatus:true)
     
-    sh "docker pull robsonbittencourt/jenkins-pipeline-example:prd"
     sh "docker run -d --name=app-prd -p 8090:8090 robsonbittencourt/jenkins-pipeline-example:prd"
   }
   
