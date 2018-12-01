@@ -14,7 +14,7 @@ services:
     ports:
       - 8085:8085
     environment:
-      -SPRING_PROFILES_ACTIVE=hml
+      - SPRING_PROFILES_ACTIVE=hml
 
   app-prd:
     image: robsonbittencourt/jenkins-pipeline-example:prd
@@ -22,7 +22,7 @@ services:
     ports:
       - 8090:8090
     environment:
-      -SPRING_PROFILES_ACTIVE=prd
+      - SPRING_PROFILES_ACTIVE=prd
 
   jenkins:
     image: robsonbittencourt/jenkins-with-docker:1.0.0
