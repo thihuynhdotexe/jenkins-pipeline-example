@@ -2,34 +2,28 @@ node{
 
   git branch: "tes", url: "https://github.com/robsonbittencourt/jenkins-pipeline-example" 
 
-  stage('Test') {
-    parallel 'unit': {
-        stage('Unit Tests') {
-            withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
-                sh "mvn test"
-            }
-        }
-    }, 'integration': {
-        stage('Integration Tests') {
-            withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
-                sh "mvn verify -Pit-tests"
-            }
-        }
-    }  
-  }
+//   stage('Test') {
+//     parallel 'unit': {
+//         stage('Unit Tests') {
+//             withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
+//                 sh "mvn test"
+//             }
+//         }
+//     }, 'integration': {
+//         stage('Integration Tests') {
+//             withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
+//                 sh "mvn verify -Pit-tests"
+//             }
+//         }
+//     }  
+//   }
 
-  stage ('Sonar') {
-    withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
-        sh "mvn sonar:sonar -Dsonar.host.url=http://sonar:9000"
-    }
-  }
+//   stage ('Sonar') {
+//     withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
+//         sh "mvn sonar:sonar -Dsonar.host.url=http://sonar:9000"
+//     }
+//   }
   
-  stage ('Ui Tests') {
-    withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
-        sh "mvn verify -Pui-tests"
-    }
-  }
-
   stage ('Build Jar') {
     withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
         sh "mvn clean package -Dmaven.test.skip=true"
@@ -41,8 +35,8 @@ node{
         VERSION = sh(script:"printf 'VER\t\${project.version}' | mvn help:evaluate | grep '^VER' | cut -f2", returnStdout:true).trim()
 
         sh "docker build --build-arg version=${VERSION} \
-            -t robsonbittencourt/jenkins-pipeline-example:dsv \
-            -t robsonbittencourt/jenkins-pipeline-example:dsv-${VERSION} . ;"
+            -t registry:5000/robsonbittencourt/jenkins-pipeline-example:dsv \
+            -t registry:5000/robsonbittencourt/jenkins-pipeline-example:dsv-${VERSION} . ;"
     }
   }
 
