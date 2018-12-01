@@ -43,7 +43,7 @@ node{
             returnStdout:true
         ) 
 
-        echo ${VERSION}
+        sh "echo ${VERSION}"
         
         sh "docker build --build-arg version=${VERSION} \
             -t robsonbittencourt/jenkins-pipeline-example:dsv-latest \
