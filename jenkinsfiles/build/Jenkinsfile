@@ -63,7 +63,9 @@ node{
   
   stage ('Deploy container') {
     withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
-        sh "docker restart app-dsv"
+        sh "docker-compose stop app-dsv"
+        sh "docker-compose rm -f app-dsv"
+        sh "docker-compose up app-dsv"   
     }
   }
 }
