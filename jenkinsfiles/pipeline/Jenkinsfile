@@ -2,15 +2,15 @@ node{
 
   git branch: "test", url: "https://github.com/robsonbittencourt/jenkins-pipeline-example" 
 
-  stage ('Build HML image') {
-    sh "docker tag localhost:5000/robsonbittencourt/jenkins-pipeline-example:dsv localhost:5000/robsonbittencourt/jenkins-pipeline-example:hml"
-    sh "docker push localhost:5000/robsonbittencourt/jenkins-pipeline-example:hml ;"
-  }
+  // stage ('Build HML image') {
+  //   sh "docker tag localhost:5000/robsonbittencourt/jenkins-pipeline-example:dsv localhost:5000/robsonbittencourt/jenkins-pipeline-example:hml"
+  //   sh "docker push localhost:5000/robsonbittencourt/jenkins-pipeline-example:hml ;"
+  // }
 
   stage ('Ui Tests') {
     withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
-        sh "mvn pre-site verify -Pui-tests"
-        //sh 'mvn allure:report'
+        sh "mvn verify -Pui-tests"
+        sh 'mvn allure:report'
     }   
 
     echo 'Publish Allure report'
@@ -27,9 +27,9 @@ node{
     )
   }
 
-  stage ('Build PRD image') {
-    sh "docker tag localhost:5000/robsonbittencourt/jenkins-pipeline-example:hml localhost:5000/robsonbittencourt/jenkins-pipeline-example:prd"
-    sh "docker push localhost:5000/robsonbittencourt/jenkins-pipeline-example:prd ;"
-  }
+  // stage ('Build PRD image') {
+  //   sh "docker tag localhost:5000/robsonbittencourt/jenkins-pipeline-example:hml localhost:5000/robsonbittencourt/jenkins-pipeline-example:prd"
+  //   sh "docker push localhost:5000/robsonbittencourt/jenkins-pipeline-example:prd ;"
+  // }
 
 }
