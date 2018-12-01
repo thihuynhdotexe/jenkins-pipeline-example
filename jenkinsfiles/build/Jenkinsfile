@@ -30,34 +30,34 @@ node{
 //     }
 //   }
 
-  stage ('Build Jar') {
-    withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
-        sh "mvn package -Dmaven.test.skip=true"
-    }
-  }
+  // stage ('Build Jar') {
+  //   withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
+  //       sh "mvn package -Dmaven.test.skip=true"
+  //   }
+  // }
 
-  stage ('Build Image') {
-    withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
-        VERSION = sh(script:"printf 'VER\t\${project.version}' | mvn help:evaluate | grep '^VER' | cut -f2", returnStdout:true).trim()
+  // stage ('Build Image') {
+  //   withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
+  //       VERSION = sh(script:"printf 'VER\t\${project.version}' | mvn help:evaluate | grep '^VER' | cut -f2", returnStdout:true).trim()
 
-        sh "docker build --build-arg version=${VERSION} \
-            -t robsonbittencourt/jenkins-pipeline-example:dsv \
-            -t robsonbittencourt/jenkins-pipeline-example:dsv-${VERSION} . ;"
-    }
-  }
+  //       sh "docker build --build-arg version=${VERSION} \
+  //           -t robsonbittencourt/jenkins-pipeline-example:dsv \
+  //           -t robsonbittencourt/jenkins-pipeline-example:dsv-${VERSION} . ;"
+  //   }
+  // }
 
-  stage ('Deploy image') {
-    withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
-        VERSION = sh(script:"printf 'VER\t\${project.version}' | mvn help:evaluate | grep '^VER' | cut -f2", returnStdout:true).trim()
+  // stage ('Deploy image') {
+  //   withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
+  //       VERSION = sh(script:"printf 'VER\t\${project.version}' | mvn help:evaluate | grep '^VER' | cut -f2", returnStdout:true).trim()
 
-        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DOCKER', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-            sh "docker login -u=${env.USERNAME} -p=${env.PASSWORD}"
-        }   
+  //       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DOCKER', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+  //           sh "docker login -u=${env.USERNAME} -p=${env.PASSWORD}"
+  //       }   
 
-        sh "docker push docker.io/robsonbittencourt/jenkins-pipeline-example:dsv ;"
-        sh "docker push docker.io/robsonbittencourt/jenkins-pipeline-example:dsv-${VERSION} ;"
-    }
-  }
+  //       sh "docker push docker.io/robsonbittencourt/jenkins-pipeline-example:dsv ;"
+  //       sh "docker push docker.io/robsonbittencourt/jenkins-pipeline-example:dsv-${VERSION} ;"
+  //   }
+  // }
   
   stage ('Deploy container') {
     withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
