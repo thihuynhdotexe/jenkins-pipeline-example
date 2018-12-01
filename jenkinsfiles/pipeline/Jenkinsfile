@@ -2,49 +2,30 @@ node{
 
   git branch: "test", url: "https://github.com/robsonbittencourt/jenkins-pipeline-example" 
 
-  // stage ('Build HML image') {
-  //   sh "docker tag robsonbittencourt/jenkins-pipeline-example:dsv robsonbittencourt/jenkins-pipeline-example:hml"
+  stage ('Build HML image') {
+    sh "docker tag robsonbittencourt/jenkins-pipeline-example:dsv robsonbittencourt/jenkins-pipeline-example:hml"
 
-  //   withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DOCKER', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-  //       sh "docker login -u=${env.USERNAME} -p=${env.PASSWORD}"
-  //   }   
+    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DOCKER', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+        sh "docker login -u=${env.USERNAME} -p=${env.PASSWORD}"
+    }   
 
-  //   sh "docker push docker.io/robsonbittencourt/jenkins-pipeline-example:hml ;"
-  // }
-
-  // stage ('Deploy HML container') {
-  //   sh(script:"docker stop app-hml", returnStatus:true)
-  //   sh(script:"docker rm -f app-hml", returnStatus:true)
-    
-  //   sh "docker run -d --name=app-hml -e SPRING_PROFILES_ACTIVE='hml' -p 8085:8085 robsonbittencourt/jenkins-pipeline-example:hml"
-  //   sh "sleep 30"   
-  // }
-
-  // stage ('Ui Tests') {
-  //   withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
-  //       sh "mvn verify -Pui-tests"
-  //   }
-  // }
-
-  // stage ('Build PRD image') {
-  //   sh "docker tag robsonbittencourt/jenkins-pipeline-example:hml robsonbittencourt/jenkins-pipeline-example:prd"
-
-  //   withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DOCKER', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-  //       sh "docker login -u=${env.USERNAME} -p=${env.PASSWORD}"
-  //   }   
-
-  //   sh "docker push docker.io/robsonbittencourt/jenkins-pipeline-example:prd ;"
-  // }
-
-  stage ('Deploy PRD container') {
-    // sh(script:"docker stop app-prd", returnStatus:true)
-    // sh(script:"docker rm -f app-prd", returnStatus:true)
-
-    sh(script:"docker-compose stop app-prd", returnStatus:true)
-    sh(script:"docker-compose rm app-prd", returnStatus:true)
-    sh(script:"docker-compose start app-prd", returnStatus:true)
-    
-    //sh "docker run -d --name=app-prd -e SPRING_PROFILES_ACTIVE='prd' -p 8090:8090 robsonbittencourt/jenkins-pipeline-example:prd"
+    sh "docker push docker.io/robsonbittencourt/jenkins-pipeline-example:hml ;"
   }
-  
+
+  stage ('Ui Tests') {
+    withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
+        sh "mvn verify -Pui-tests"
+    }
+  }
+
+  stage ('Build PRD image') {
+    sh "docker tag robsonbittencourt/jenkins-pipeline-example:hml robsonbittencourt/jenkins-pipeline-example:prd"
+
+    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DOCKER', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+        sh "docker login -u=${env.USERNAME} -p=${env.PASSWORD}"
+    }   
+
+    sh "docker push docker.io/robsonbittencourt/jenkins-pipeline-example:prd ;"
+  }
+    
 }
