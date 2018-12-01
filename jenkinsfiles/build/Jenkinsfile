@@ -38,7 +38,7 @@ node{
 
   stage ('Build Image') {
     withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
-        VERSION = sh "printf 'VER\t\${project.version}' | mvn help:evaluate | grep '^VER' | cut -f2"
+        VERSION = sh(script:"printf 'VER\t\${project.version}' | mvn help:evaluate | grep '^VER' | cut -f2", returnStdout:true).trim()
 
         sh "echo ${VERSION}"
         
