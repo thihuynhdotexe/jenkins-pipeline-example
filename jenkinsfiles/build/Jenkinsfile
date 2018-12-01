@@ -38,12 +38,18 @@ node{
 
   stage ('Build Image') {
     withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
-        sh "docker build --build-arg version=${VERSION} --build-arg profile=${PROFILE} -t robsonbittencourt/jenkins-pipeline-example:dsv-latest -t robsonbittencourt/jenkins-pipeline-example:dsv-${VERSION} . ;"
+        VERSION = sh "mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version"
+        
+        sh "docker build --build-arg version=${VERSION} --build-arg profile=${PROFILE} \
+            -t robsonbittencourt/jenkins-pipeline-example:dsv-latest \
+            -t robsonbittencourt/jenkins-pipeline-example:dsv-${VERSION} . ;"
     }
   }
 
   stage ('Deploy image') {
     withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
+        VERSION = sh "mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version"
+        
         sh "docker push docker.io/robsonbittencourt/jenkins-pipeline-example:dsv-latest ;"
         sh "docker push docker.io/robsonbittencourt/jenkins-pipeline-example:dsv-${VERSION} ;"
     }
