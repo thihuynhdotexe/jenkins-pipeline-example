@@ -1,6 +1,6 @@
 node{
 
-  git branch: "test", url: "https://github.com/robsonbittencourt/jenkins-pipeline-example" 
+  git branch: "tes", url: "https://github.com/robsonbittencourt/jenkins-pipeline-example" 
 
 //   stage('Test') {
 //     parallel 'unit': {
