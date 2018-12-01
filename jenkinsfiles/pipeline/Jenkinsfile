@@ -16,7 +16,7 @@ node{
     sh(script:"docker stop app-hml", returnStatus:true)
     sh(script:"docker rm -f app-hml", returnStatus:true)
     
-    sh "docker run -d --name=app-hml -e PROFILE='hml' -p 8085:8085 robsonbittencourt/jenkins-pipeline-example:hml"
+    sh "docker run -d --name=app-hml -e SPRING_PROFILES_ACTIVE='hml' -p 8085:8085 robsonbittencourt/jenkins-pipeline-example:hml"
     sh "sleep 30"   
   }
 
@@ -40,7 +40,7 @@ node{
     sh(script:"docker stop app-prd", returnStatus:true)
     sh(script:"docker rm -f app-prd", returnStatus:true)
     
-    sh "docker run -d --name=app-prd -e PROFILE='prd' -p 8090:8090 robsonbittencourt/jenkins-pipeline-example:prd"
+    sh "docker run -d --name=app-prd -e SPRING_PROFILES_ACTIVE='prd' -p 8090:8090 robsonbittencourt/jenkins-pipeline-example:prd"
   }
   
 }
