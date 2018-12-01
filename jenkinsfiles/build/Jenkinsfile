@@ -42,6 +42,8 @@ node{
             script: "mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version",
             returnStdout:true
         ) 
+
+        echo ${VERSION}
         
         sh "docker build --build-arg version=${VERSION} \
             -t robsonbittencourt/jenkins-pipeline-example:dsv-latest \
