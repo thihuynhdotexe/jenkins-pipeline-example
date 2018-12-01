@@ -6,6 +6,6 @@ ENV PROFILE
 ARG version
 
 ENV JAVA_APP_JAR=jenkins-pipeline-example-$version.jar \
-    SPRING_PROFILES_ACTIVE=$PROFILE
+    SPRING_PROFILES_ACTIVE=${PROFILE}
 
 ADD target/$JAVA_APP_JAR /deployments
