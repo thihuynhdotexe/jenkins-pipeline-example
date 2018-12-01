@@ -39,7 +39,7 @@ node{
   stage ('Build Image') {
     withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
         VERSION = sh (
-            script: "mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version",
+            script: "$(printf 'VER\t${project.version}' | mvn help:evaluate | grep '^VER' | cut -f2)",
             returnStdout:true
         ) 
 
@@ -54,7 +54,7 @@ node{
   stage ('Deploy image') {
     withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
         VERSION = sh (
-            script: "mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version",
+            script: "$(printf 'VER\t${project.version}' | mvn help:evaluate | grep '^VER' | cut -f2)",
             returnStdout:true
         )
         
