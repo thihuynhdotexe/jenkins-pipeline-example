@@ -9,7 +9,7 @@ node{
         sh "docker login -u=${env.USERNAME} -p=${env.PASSWORD}"
     }   
 
-    sh "docker push docker.io/robsonbittencourt/jenkins-pipeline-example:hml ;"
+    sh "docker push registry:5000/robsonbittencourt/jenkins-pipeline-example:hml ;"
   }
 
   stage ('Ui Tests') {
@@ -25,7 +25,7 @@ node{
         sh "docker login -u=${env.USERNAME} -p=${env.PASSWORD}"
     }   
 
-    sh "docker push docker.io/robsonbittencourt/jenkins-pipeline-example:prd ;"
+    sh "docker push registry:5000/robsonbittencourt/jenkins-pipeline-example:prd ;"
   }
-    
+
 }
