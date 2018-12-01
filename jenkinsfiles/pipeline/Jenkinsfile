@@ -3,12 +3,7 @@ node{
   git branch: "test", url: "https://github.com/robsonbittencourt/jenkins-pipeline-example" 
 
   stage ('Build HML image') {
-    sh "docker tag localhost:5000/robsonbittencourt/jenkins-pipeline-example:dsv robsonbittencourt/jenkins-pipeline-example:hml"
-
-    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DOCKER', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-        sh "docker login -u=${env.USERNAME} -p=${env.PASSWORD}"
-    }   
-
+    sh "docker tag localhost:5000/robsonbittencourt/jenkins-pipeline-example:dsv localhost:5000/robsonbittencourt/jenkins-pipeline-example:hml"
     sh "docker push localhost:5000/robsonbittencourt/jenkins-pipeline-example:hml ;"
   }
 
@@ -19,12 +14,7 @@ node{
   }
 
   stage ('Build PRD image') {
-    sh "docker tag robsonbittencourt/jenkins-pipeline-example:hml robsonbittencourt/jenkins-pipeline-example:prd"
-
-    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DOCKER', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-        sh "docker login -u=${env.USERNAME} -p=${env.PASSWORD}"
-    }   
-
+    sh "docker tag localhost:5000/robsonbittencourt/jenkins-pipeline-example:hml localhost:5000/robsonbittencourt/jenkins-pipeline-example:prd"
     sh "docker push localhost:5000/robsonbittencourt/jenkins-pipeline-example:prd ;"
   }
 
