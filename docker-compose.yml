@@ -2,27 +2,27 @@ version: '3.4'
 
 services:
 
-  app-dsv:
-    image: robsonbittencourt/jenkins-pipeline-example:dsv
-    container_name: app-dsv
-    ports:
-      - 8081:8081
+  # app-dsv:
+  #   image: robsonbittencourt/jenkins-pipeline-example:dsv
+  #   container_name: app-dsv
+  #   ports:
+  #     - 8081:8081
     
-  app-hml:
-    image: robsonbittencourt/jenkins-pipeline-example:hml
-    container_name: app-hml
-    ports:
-      - 8085:8085
-    environment:
-      - SPRING_PROFILES_ACTIVE=hml
+  # app-hml:
+  #   image: robsonbittencourt/jenkins-pipeline-example:hml
+  #   container_name: app-hml
+  #   ports:
+  #     - 8085:8085
+  #   environment:
+  #     - SPRING_PROFILES_ACTIVE=hml
 
-  app-prd:
-    image: robsonbittencourt/jenkins-pipeline-example:prd
-    container_name: app-prd
-    ports:
-      - 8090:8090
-    environment:
-      - SPRING_PROFILES_ACTIVE=prd
+  # app-prd:
+  #   image: robsonbittencourt/jenkins-pipeline-example:prd
+  #   container_name: app-prd
+  #   ports:
+  #     - 8090:8090
+  #   environment:
+  #     - SPRING_PROFILES_ACTIVE=prd
 
   jenkins:
     image: robsonbittencourt/jenkins-with-docker:1.0.0
@@ -31,40 +31,41 @@ services:
       - /var/jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
       - ~/.m2:/root/.m2
+      - v .:/var/jenkins_home/git:ro 
     ports:
       - 8080:8080
       - 50000:50000
     environment:
       - JAVA_OPTS=-Dhudson.model.DirectoryBrowserSupport.CSP="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';
 
-  sonar:
-    image: sonarqube
-    container_name: sonarqube
-    ports:
-      - 9000:9000
-      - 9092:9092
+  # sonar:
+  #   image: sonarqube
+  #   container_name: sonarqube
+  #   ports:
+  #     - 9000:9000
+  #     - 9092:9092
   
-  zalenium:
-    image: dosel/zalenium
-    container_name: zalenium
-    hostname: zalenium
-    tty: true
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /usr/bin/docker:/usr/bin/docker
-    ports:
-      - 4444:4444
-    command: >
-      start --desiredContainers 1
-            --maxDockerSeleniumContainers 2
-            --screenWidth 1200 --screenHeight 800
-            --timeZone "America/SaoPaulo"
-            --videoRecordingEnabled false
-    environment:
-      - ZALENIUM_EXTRA_JVM_PARAMS=-Dwebdriver.http.factory=apache
+  # zalenium:
+  #   image: dosel/zalenium
+  #   container_name: zalenium
+  #   hostname: zalenium
+  #   tty: true
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     - /usr/bin/docker:/usr/bin/docker
+  #   ports:
+  #     - 4444:4444
+  #   command: >
+  #     start --desiredContainers 1
+  #           --maxDockerSeleniumContainers 2
+  #           --screenWidth 1200 --screenHeight 800
+  #           --timeZone "America/SaoPaulo"
+  #           --videoRecordingEnabled false
+  #   environment:
+  #     - ZALENIUM_EXTRA_JVM_PARAMS=-Dwebdriver.http.factory=apache
   
-  docker-registry:
-    image: registry:2
-    container_name: registry
-    ports:
-      - 5000:5000
+  # docker-registry:
+  #   image: registry:2
+  #   container_name: registry
+  #   ports:
+  #     - 5000:5000
