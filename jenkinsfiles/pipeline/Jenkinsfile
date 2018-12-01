@@ -9,8 +9,8 @@ node{
 
   stage ('Ui Tests') {
     withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
-        sh "mvn verify -Pui-tests"
-        sh 'mvn allure:report'
+        sh "mvn pre-site verify -Pui-tests"
+        //sh 'mvn allure:report'
     }   
 
     echo 'Publish Allure report'
