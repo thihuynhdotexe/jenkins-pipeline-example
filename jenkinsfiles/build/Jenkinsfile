@@ -40,8 +40,6 @@ node{
     withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
         VERSION = sh(script:"printf 'VER\t\${project.version}' | mvn help:evaluate | grep '^VER' | cut -f2", returnStdout:true).trim()
 
-        sh "echo ${VERSION}"
-        
         sh "docker build --build-arg version=${VERSION} \
             -t robsonbittencourt/jenkins-pipeline-example:dsv \
             -t robsonbittencourt/jenkins-pipeline-example:dsv-${VERSION} . ;"
