@@ -2,11 +2,11 @@ version: '3.4'
 
 services:
 
-  # app-dsv:
-  #   image: robsonbittencourt/jenkins-pipeline-example:dsv
-  #   container_name: app-dsv
-  #   ports:
-  #     - 8081:8081
+  app-dsv:
+    image: robsonbittencourt/jenkins-pipeline-example:dsv
+    container_name: app-dsv
+    ports:
+      - 8081:8081
     
   app-hml:
     image: robsonbittencourt/jenkins-pipeline-example:hml
@@ -16,13 +16,13 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=hml
 
-  # app-prd:
-  #   image: robsonbittencourt/jenkins-pipeline-example:prd
-  #   container_name: app-prd
-  #   ports:
-  #     - 8090:8090
-  #   environment:
-  #     - SPRING_PROFILES_ACTIVE=prd
+  app-prd:
+    image: robsonbittencourt/jenkins-pipeline-example:prd
+    container_name: app-prd
+    ports:
+      - 8090:8090
+    environment:
+      - SPRING_PROFILES_ACTIVE=prd
 
   jenkins:
     image: robsonbittencourt/jenkins-with-docker:1.0.0
@@ -37,12 +37,12 @@ services:
     environment:
       - JAVA_OPTS=-Dhudson.model.DirectoryBrowserSupport.CSP="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';
 
-  # sonar:
-  #   image: sonarqube
-  #   container_name: sonarqube
-  #   ports:
-  #     - 9000:9000
-  #     - 9092:9092
+  sonar:
+    image: sonarqube
+    container_name: sonarqube
+    ports:
+      - 9000:9000
+      - 9092:9092
   
   zalenium:
     image: dosel/zalenium
@@ -63,8 +63,8 @@ services:
     environment:
       - ZALENIUM_EXTRA_JVM_PARAMS=-Dwebdriver.http.factory=apache
   
-  # docker-registry:
-  #   image: registry:2
-  #   container_name: registry
-  #   ports:
-  #     - 5000:5000
+  docker-registry:
+    image: registry:2
+    container_name: registry
+    ports:
+      - 5000:5000
