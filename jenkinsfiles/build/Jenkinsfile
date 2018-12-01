@@ -63,7 +63,7 @@ node{
     withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
         sh "docker stop app-dsv"
         sh "docker rm -f app-dsv"
-        sh "docker pull -f robsonbittencourt/jenkins-pipeline-example:dsv"
+        sh "docker pull robsonbittencourt/jenkins-pipeline-example:dsv"
         sh "docker run -p 8081:8081 robsonbittencourt/jenkins-pipeline-example:dsv"   
     }
   }
