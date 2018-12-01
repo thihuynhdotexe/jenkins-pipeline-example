@@ -44,9 +44,9 @@ node{
     withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
         VERSION = sh(script:"printf 'VER\t\${project.version}' | mvn help:evaluate | grep '^VER' | cut -f2", returnStdout:true).trim()
 
-        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DOCKER', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-            sh "docker login -u=${env.USERNAME} -p=${env.PASSWORD}"
-        }   
+        // withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DOCKER', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+        //     sh "docker login -u=${env.USERNAME} -p=${env.PASSWORD}"
+        // }   
 
         sh "docker push registry:5000/robsonbittencourt/jenkins-pipeline-example:dsv ;"
         sh "docker push registry:5000/robsonbittencourt/jenkins-pipeline-example:dsv-${VERSION} ;"
