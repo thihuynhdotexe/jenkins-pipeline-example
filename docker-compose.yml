@@ -2,14 +2,20 @@ version: '3.4'
 
 services:
 
+app-hml:
+    image: robsonbittencourt/jenkins-pipeline-example:dsv
+    container_name: app-dsv
+    ports:
+      - 8081:8081
+
   app-hml:
-    image: robsonbittencourt/jenkins-pipeline-example:hml-1.0.0
+    image: robsonbittencourt/jenkins-pipeline-example:hml
     container_name: app-hml
     ports:
       - 8085:8085
 
   app-prd:
-    image: robsonbittencourt/jenkins-pipeline-example:prd-1.0.0
+    image: robsonbittencourt/jenkins-pipeline-example:prd
     container_name: app-prd
     ports:
       - 8090:8090

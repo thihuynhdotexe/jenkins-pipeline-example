@@ -55,15 +55,15 @@ node{
         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DOCKER', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
             sh "docker login -u=${env.USERNAME} -p=${env.PASSWORD}"
         }   
-             
+
         sh "docker push docker.io/robsonbittencourt/jenkins-pipeline-example:dsv-latest ;"
         sh "docker push docker.io/robsonbittencourt/jenkins-pipeline-example:dsv-${VERSION} ;"
     }
   }
   
-//   stage ('Deploy container') {
-//     withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
-//         sh "docker restart app-dsv"
-//     }
-//   }
+  stage ('Deploy container') {
+    withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
+        sh "docker restart app-dsv"
+    }
+  }
 }
