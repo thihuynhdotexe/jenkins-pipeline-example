@@ -43,7 +43,7 @@ node{
         sh "echo ${VERSION}"
         
         sh "docker build --build-arg version=${VERSION} \
-            -t robsonbittencourt/jenkins-pipeline-example:dsv-latest \
+            -t robsonbittencourt/jenkins-pipeline-example:dsv \
             -t robsonbittencourt/jenkins-pipeline-example:dsv-${VERSION} . ;"
     }
   }
@@ -56,7 +56,7 @@ node{
             sh "docker login -u=${env.USERNAME} -p=${env.PASSWORD}"
         }   
 
-        sh "docker push docker.io/robsonbittencourt/jenkins-pipeline-example:dsv-latest ;"
+        sh "docker push docker.io/robsonbittencourt/jenkins-pipeline-example:dsv ;"
         sh "docker push docker.io/robsonbittencourt/jenkins-pipeline-example:dsv-${VERSION} ;"
     }
   }
