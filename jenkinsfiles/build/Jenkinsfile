@@ -40,7 +40,7 @@ node{
     withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
         VERSION = sh (
             script: "mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version",
-            returnStatus: true
+            returnStdout:true
         ) 
         
         sh "docker build --build-arg version=${VERSION} \
@@ -53,8 +53,8 @@ node{
     withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
         VERSION = sh (
             script: "mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version",
-            returnStatus: true
-        ) 
+            returnStdout:true
+        )
         
         sh "docker push docker.io/robsonbittencourt/jenkins-pipeline-example:dsv-latest ;"
         sh "docker push docker.io/robsonbittencourt/jenkins-pipeline-example:dsv-${VERSION} ;"
