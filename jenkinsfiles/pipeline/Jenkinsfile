@@ -11,6 +11,21 @@ node{
     withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
         sh "mvn verify -Pui-tests"
     }
+
+    sh 'mvn allure:report'
+
+    echo 'Publish Allure report'
+    
+    publishHTML(
+        target: [
+            allowMissing         : false,
+            alwaysLinkToLastBuild: false,
+            keepAll              : true,
+            reportDir            : 'target/site/allure-maven-plugin',
+            reportFiles          : 'index.html',
+            reportName           : "Allure Report"
+        ]
+    )
   }
 
   stage ('Build PRD image') {
