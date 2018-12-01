@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
 
-app-hml:
+  app-dsv:
     image: robsonbittencourt/jenkins-pipeline-example:dsv
     container_name: app-dsv
     ports:
