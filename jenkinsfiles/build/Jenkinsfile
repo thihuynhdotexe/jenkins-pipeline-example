@@ -61,10 +61,11 @@ node{
   
   stage ('Deploy container') {
     withEnv(["JAVA_HOME=${ tool "java-8" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
-        sh "docker stop app-dsv || true"
-        sh "docker rm -f app-dsv || true"
+        sh(script:"docker stop app-dsv" returnStatus:false)
+        sh(script:"docker rm -f app-dsv" returnStatus:false)
+        
         sh "docker pull robsonbittencourt/jenkins-pipeline-example:dsv"
-        sh "docker run -p 8081:8081 robsonbittencourt/jenkins-pipeline-example:dsv"   
+        sh "docker run -p 8081:8081 robsonbittencourt/jenkins-pipeline-example:dsv -d"   
     }
   }
 }
