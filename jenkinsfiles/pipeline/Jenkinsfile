@@ -40,8 +40,9 @@ node{
     // sh(script:"docker stop app-prd", returnStatus:true)
     // sh(script:"docker rm -f app-prd", returnStatus:true)
 
-    sh(script:"docker-compose start app-prd", returnStatus:true)
+    sh(script:"docker-compose stop app-prd", returnStatus:true)
     sh(script:"docker-compose rm app-prd", returnStatus:true)
+    sh(script:"docker-compose start app-prd", returnStatus:true)
     
     //sh "docker run -d --name=app-prd -e SPRING_PROFILES_ACTIVE='prd' -p 8090:8090 robsonbittencourt/jenkins-pipeline-example:prd"
   }
