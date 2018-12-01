@@ -35,8 +35,8 @@ node{
         VERSION = sh(script:"printf 'VER\t\${project.version}' | mvn help:evaluate | grep '^VER' | cut -f2", returnStdout:true).trim()
 
         sh "docker build --build-arg version=${VERSION} \
-            -t registry:5000/robsonbittencourt/jenkins-pipeline-example:dsv \
-            -t registry:5000/robsonbittencourt/jenkins-pipeline-example:dsv-${VERSION} . ;"
+            -t localhost:5000/robsonbittencourt/jenkins-pipeline-example:dsv \
+            -t localhost:5000/robsonbittencourt/jenkins-pipeline-example:dsv-${VERSION} . ;"
     }
   }
 
@@ -48,8 +48,8 @@ node{
         //     sh "docker login -u=${env.USERNAME} -p=${env.PASSWORD}"
         // }   
 
-        sh "docker push registry:5000/robsonbittencourt/jenkins-pipeline-example:dsv ;"
-        sh "docker push registry:5000/robsonbittencourt/jenkins-pipeline-example:dsv-${VERSION} ;"
+        sh "docker push localhost:5000/robsonbittencourt/jenkins-pipeline-example:dsv ;"
+        sh "docker push localhost:5000/robsonbittencourt/jenkins-pipeline-example:dsv-${VERSION} ;"
     }
   }
   
