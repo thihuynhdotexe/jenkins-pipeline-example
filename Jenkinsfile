@@ -1,5 +1,3 @@
-@Library('umovme-shared-libraries@master')_
-
 pipeline {
     agent any 
     options { timestamps () }
