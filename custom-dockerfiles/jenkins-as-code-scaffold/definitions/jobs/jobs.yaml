@@ -5,7 +5,7 @@ jobs:
           cpsScm {
               scm {
                 git {
-                    remote { url 'https://github.com/robsonbittencourt/jenkins-pipeline-example' }
+                    remote { url 'https://github.com/thihuynhdotexe/jenkins-pipeline-example' }
                     branch '*/master'
                 }
               }
@@ -20,7 +20,7 @@ jobs:
           cpsScm {
               scm {
                 git {
-                    remote { url 'https://github.com/robsonbittencourt/jenkins-pipeline-example' }
+                    remote { url 'https://github.com/thihuynhdotexe/jenkins-pipeline-example' }
                     branch '*/master'
                 }
               }
