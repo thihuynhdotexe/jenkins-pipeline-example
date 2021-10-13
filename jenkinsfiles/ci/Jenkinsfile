@@ -10,9 +10,9 @@ node{
 
   stage ('OWASP Dependency-Check') {
     withEnv(["JAVA_HOME=${ tool "java-11" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
-        sh "mvn dependency-check:check"
-        dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
+        sh "mvn dependency-check:check"  
     }
+    dependencyCheckPublisher pattern: "target/dependency-check-report.xml"
   }
 
   stage ('Sonarqube') {
