@@ -74,3 +74,4 @@ workflow-job:2.41
 sshd:3.1.0
 font-awesome-api:5.15.3-4
 workflow-support:3.8
+dependency-check-jenkins-plugin:5.1.1
