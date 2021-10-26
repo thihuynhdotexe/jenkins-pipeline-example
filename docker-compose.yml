@@ -71,4 +71,4 @@ services:
       "-config", "api.addrs.addr.regex=true"
     ]
     ports:
-      - "8090:8090"
+      - "8091:8090"
