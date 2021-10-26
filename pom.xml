@@ -198,7 +198,23 @@
                     <format>ALL</format>
                 </configuration>
             </plugin>
-            
+
+            <plugin>
+                <groupId>br.com.softplan.security.zap</groupId>
+                <artifactId>zap-maven-plugin</artifactId>
+                <version>${zap-maven-plugin.version}</version>
+                <configuration>
+                    <zapPort>8090</zapPort>
+                    <targetUrl>http://localhost:8081/</targetUrl>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals><goal>analyze</goal></goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>

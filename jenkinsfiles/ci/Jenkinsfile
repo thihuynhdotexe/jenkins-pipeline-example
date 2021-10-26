@@ -35,5 +35,11 @@ node{
   stage ('Deploy app in DSV') {
     sh "docker rm -f app-dsv &>/dev/null && sleep 10 && docker run --name=app-dsv -p 8081:8081 --net jenkins-pipeline-example_default -e SPRING_PROFILES_ACTIVE=dsv -d localhost:5000/jenkins-pipeline-example:dsv"
   }
+
+  stage ('OWASP ZAP') {
+    withEnv(["JAVA_HOME=${ tool "java-11" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
+        sh "mvn zap-maven-plugin:analyze"
+    }
+  }
   
 }
