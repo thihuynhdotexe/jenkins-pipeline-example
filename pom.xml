@@ -202,11 +202,12 @@
                     <zapHost>192.168.1.10</zapHost>
                     <zapPort>8091</zapPort>
                     <targetUrl>http://192.168.1.10:8081/</targetUrl>
+                    <shouldRunWithDocker>true</shouldRunWithDocker>
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>integration-test</phase>
-                        <goals><goal>seleniumAnalyze</goal></goals>
+                        <phase>verify</phase>
+                        <goals><goal>analyze</goal></goals>
                     </execution>
                 </executions>
             </plugin>
