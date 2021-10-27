@@ -40,6 +40,23 @@ node{
     withEnv(["JAVA_HOME=${ tool "java-11" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
         sh "mvn br.com.softplan.security.zap:zap-maven-plugin:analyze"
     }
+    publishHTML([
+      allowMissing: false,
+      alwaysLinkToLastBuild: false,
+      keepAll: false,
+      reportDir: 'target/zap-reports',
+      reportFiles: 'zapReport.html',
+      reportName: 'ZAP Report',
+      reportTitles: ''])
+
+    publishHTML([
+      allowMissing: false,
+      alwaysLinkToLastBuild: false,
+      keepAll: false,
+      reportDir: 'target/zap-reports',
+      reportFiles: 'zapSpiderResults.html',
+      reportName: 'ZAP Spider Report',
+      reportTitles: ''])
   }
   
 }
