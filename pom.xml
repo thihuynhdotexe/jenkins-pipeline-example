@@ -201,6 +201,7 @@
                 <configuration>
                     <zapHost>zaproxy</zapHost>
                     <zapPort>8091</zapPort>
+                    <shouldRunAjaxSpider>true<</shouldRunAjaxSpider>>
                     <targetUrl>http://example.com/</targetUrl>
                 </configuration>
                 <executions>
