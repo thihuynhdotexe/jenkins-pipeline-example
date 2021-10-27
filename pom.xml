@@ -202,6 +202,8 @@
                     <zapHost>zaproxy</zapHost>
                     <zapPort>8091</zapPort>
                     <targetUrl>http://localhost:8081/</targetUrl>
+                    <activeScanStartingPointUrl>http://localhost:8081/</activeScanStartingPointUrl>
+                    <shouldStartNewSession>false</shouldStartNewSession>
                 </configuration>
                 <executions>
                     <execution>
