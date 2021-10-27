@@ -199,8 +199,9 @@
                 <artifactId>zap-maven-plugin</artifactId>
                 <version>1.2.1-0</version>
                 <configuration>
+                    <zapHost>192.168.1.10</zapHost>
                     <zapPort>8091</zapPort>
-                    <targetUrl>http://localhost:8081/</targetUrl>
+                    <targetUrl>http://192.168.1.10:8081/</targetUrl>
                 </configuration>
                 <executions>
                     <execution>
