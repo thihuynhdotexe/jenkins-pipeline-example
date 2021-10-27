@@ -38,7 +38,7 @@ node{
 
   stage ('OWASP ZAP') {
     withEnv(["JAVA_HOME=${ tool "java-11" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
-        sh "mvn br.com.softplan.security.zap:zap-maven-plugin:analyze -DspiderURL=true"
+        sh "mvn br.com.softplan.security.zap:zap-maven-plugin:analyze -DspiderURL=true -DsaveSession=flalse -DshutdownZAP=false"
     }
     publishHTML([
       allowMissing: false,
