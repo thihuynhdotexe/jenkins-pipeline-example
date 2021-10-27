@@ -34,11 +34,12 @@ node{
 
   stage ('Deploy app in DSV') {
     sh "docker rm -f app-dsv &>/dev/null && sleep 10 && docker run --name=app-dsv -p 8081:8081 --net jenkins-pipeline-example_default -e SPRING_PROFILES_ACTIVE=dsv -d localhost:5000/jenkins-pipeline-example:dsv"
+    sh "sleep 20"
   }
 
   stage ('OWASP ZAP') {
     withEnv(["JAVA_HOME=${ tool "java-11" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
-        sh "mvn br.com.softplan.security.zap:zap-maven-plugin:analyze -DsaveSession=flalse -DshutdownZAP=false -DzapProxyHost=zaproxy -DzapProxyPort=8091 -DtargetURL=http://example.com/"
+        sh "mvn br.com.softplan.security.zap:zap-maven-plugin:analyze "
     }
     publishHTML([
       allowMissing: false,

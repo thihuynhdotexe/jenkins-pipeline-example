@@ -202,7 +202,7 @@
                     <zapHost>zaproxy</zapHost>
                     <zapPort>8091</zapPort>
                     <shouldRunAjaxSpider>true</shouldRunAjaxSpider>
-                    <targetUrl>http://example.com/</targetUrl>
+                    <targetUrl>http://127.0.0.1:8081/</targetUrl>
                 </configuration>
                 <executions>
                     <execution>
