@@ -39,7 +39,7 @@ node{
 
   stage ('OWASP ZAP') {
     withEnv(["JAVA_HOME=${ tool "java-11" }", "PATH+MAVEN=${ tool "maven" }/bin:${env.JAVA_HOME}/bin"]) {
-        sh "mvn br.com.softplan.security.zap:zap-maven-plugin:analyze -DsaveSession=flalse -DshutdownZAP=false -DzapProxyHost=zaproxy -DzapProxyPort=8091 -DtargetURL=http://192.168.1.10:8081/"
+        sh "mvn br.com.softplan.security.zap:zap-maven-plugin:analyze -DsaveSession=flalse -DshutdownZAP=false -DzapProxyHost=zaproxy -DzapProxyPort=8091 -DtargetURL=http://example.com/"
     }
     publishHTML([
       allowMissing: false,
